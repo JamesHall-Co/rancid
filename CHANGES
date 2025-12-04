@@ -1,4 +1,7 @@
 3.14.99
+	plogin: command-line option t is not expanded correctly - Emmanuel
+	Halbwachs
+
 	junos.pm: fail collection on syslog garbage in output.  Probably an
 	ugly stack trace.
 
