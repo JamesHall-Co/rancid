@@ -578,6 +578,12 @@ sub ShowLicense {
 	    next;
 	}
 
+	# filter Smart Account as the date/time changes often
+	if (/(^\s*Smart Account:.*)As.*/i) {
+	    ProcessHistory("COMMENTS","keysort","LICENSE","! $1<limited>\n");
+	    next;
+	}
+
 	# drop license counts
 	next if (/license usage:/i);
 	if (/(.*)count status/i) {
@@ -1231,7 +1237,7 @@ sub DirSlotN {
 	#       -rw-                                   vlan.dat
 	#       -rw-                                           vlan.dat
 	if (/(dhcp_[^. ]*\.txt|vlan\.dat|\slog|sflog|snooping|syslog)\s*$/ ||
-	    /(\sssd|tracelogs|throughput_monitor_params)\s*$/ ||
+	    /(\sssd|tracelogs|license_evlog|nvram_config|nvram_config_bkup|throughput_monitor_params)\s*$/ ||
 	    /((?:private|startup|underlying)-config)\s*$/) {
 	    if (/(\s*\d+\s+)(\S+\s+)(\d+)(\s+)(\w+ \d+\s+\d+ \d+:\d+:\d+ .\d+:\d+)/) {
 		my($fn, $a, $sz, $c, $dt, $rem) = ($1, $2, $3, $4, $5, $');
